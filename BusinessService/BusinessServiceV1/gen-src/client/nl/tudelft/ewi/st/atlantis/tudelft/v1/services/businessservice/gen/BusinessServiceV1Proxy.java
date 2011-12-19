@@ -71,27 +71,15 @@ public class BusinessServiceV1Proxy
         return m_service.poll(block, partial);
     }
 
-    public Response<UpdateWalletDataResponse> updateWalletDataAsync(UpdateWalletDataRequest param0) {
-        Dispatch dispatch = m_service.createDispatch("updateWalletData");
-        Response<UpdateWalletDataResponse> result = dispatch.invokeAsync(param0);
-        return result;
-    }
-
-    public Future<?> updateWalletDataAsync(UpdateWalletDataRequest param0, AsyncHandler<UpdateWalletDataResponse> param1) {
-        Dispatch dispatch = m_service.createDispatch("updateWalletData");
-        Future<?> result = dispatch.invokeAsync(param0, param1);
+    public Response<RegisterResponse> registerAsync(RegisterRequest param0) {
+        Dispatch dispatch = m_service.createDispatch("register");
+        Response<RegisterResponse> result = dispatch.invokeAsync(param0);
         return result;
     }
 
     public Future<?> registerAsync(RegisterRequest param0, AsyncHandler<RegisterResponse> param1) {
         Dispatch dispatch = m_service.createDispatch("register");
         Future<?> result = dispatch.invokeAsync(param0, param1);
-        return result;
-    }
-
-    public Response<RegisterResponse> registerAsync(RegisterRequest param0) {
-        Dispatch dispatch = m_service.createDispatch("register");
-        Response<RegisterResponse> result = dispatch.invokeAsync(param0);
         return result;
     }
 
@@ -115,18 +103,6 @@ public class BusinessServiceV1Proxy
 
     public Future<?> logoutAsync(LogoutRequest param0, AsyncHandler<LogoutResponse> param1) {
         Dispatch dispatch = m_service.createDispatch("logout");
-        Future<?> result = dispatch.invokeAsync(param0, param1);
-        return result;
-    }
-
-    public Response<GetWalletDataResponse> getWalletDataAsync(GetWalletDataRequest param0) {
-        Dispatch dispatch = m_service.createDispatch("getWalletData");
-        Response<GetWalletDataResponse> result = dispatch.invokeAsync(param0);
-        return result;
-    }
-
-    public Future<?> getWalletDataAsync(GetWalletDataRequest param0, AsyncHandler<GetWalletDataResponse> param1) {
-        Dispatch dispatch = m_service.createDispatch("getWalletData");
         Future<?> result = dispatch.invokeAsync(param0, param1);
         return result;
     }
@@ -187,6 +163,18 @@ public class BusinessServiceV1Proxy
 
     public Future<?> getHoldingAsync(GetHoldingRequest param0, AsyncHandler<GetHoldingResponse> param1) {
         Dispatch dispatch = m_service.createDispatch("getHolding");
+        Future<?> result = dispatch.invokeAsync(param0, param1);
+        return result;
+    }
+
+    public Response<UpdateWalletDataResponse> updateWalletDataAsync(UpdateWalletDataRequest param0) {
+        Dispatch dispatch = m_service.createDispatch("updateWalletData");
+        Response<UpdateWalletDataResponse> result = dispatch.invokeAsync(param0);
+        return result;
+    }
+
+    public Future<?> updateWalletDataAsync(UpdateWalletDataRequest param0, AsyncHandler<UpdateWalletDataResponse> param1) {
+        Dispatch dispatch = m_service.createDispatch("updateWalletData");
         Future<?> result = dispatch.invokeAsync(param0, param1);
         return result;
     }
@@ -287,6 +275,18 @@ public class BusinessServiceV1Proxy
         return result;
     }
 
+    public Response<GetWalletDataResponse> getWalletDataAsync(GetWalletDataRequest param0) {
+        Dispatch dispatch = m_service.createDispatch("getWalletData");
+        Response<GetWalletDataResponse> result = dispatch.invokeAsync(param0);
+        return result;
+    }
+
+    public Future<?> getWalletDataAsync(GetWalletDataRequest param0, AsyncHandler<GetWalletDataResponse> param1) {
+        Dispatch dispatch = m_service.createDispatch("getWalletData");
+        Future<?> result = dispatch.invokeAsync(param0, param1);
+        return result;
+    }
+
     public Response<GetClosedOrdersResponse> getClosedOrdersAsync(GetClosedOrdersRequest param0) {
         Dispatch dispatch = m_service.createDispatch("getClosedOrders");
         Response<GetClosedOrdersResponse> result = dispatch.invokeAsync(param0);
@@ -335,32 +335,6 @@ public class BusinessServiceV1Proxy
             throw wrapInvocationException(svcInvocationEx);
         }
         LogoutResponse result = ((LogoutResponse) returnParamList.get(0));
-        return result;
-    }
-
-    public UpdateWalletDataResponse updateWalletData(UpdateWalletDataRequest param0) {
-        Object[] params = new Object[ 1 ] ;
-        params[ 0 ] = param0;
-        List<Object> returnParamList = new ArrayList<Object>();
-        try {
-            m_service.invoke("updateWalletData", params, returnParamList);
-        } catch (ServiceInvocationException svcInvocationEx) {
-            throw wrapInvocationException(svcInvocationEx);
-        }
-        UpdateWalletDataResponse result = ((UpdateWalletDataResponse) returnParamList.get(0));
-        return result;
-    }
-
-    public GetWalletDataResponse getWalletData(GetWalletDataRequest param0) {
-        Object[] params = new Object[ 1 ] ;
-        params[ 0 ] = param0;
-        List<Object> returnParamList = new ArrayList<Object>();
-        try {
-            m_service.invoke("getWalletData", params, returnParamList);
-        } catch (ServiceInvocationException svcInvocationEx) {
-            throw wrapInvocationException(svcInvocationEx);
-        }
-        GetWalletDataResponse result = ((GetWalletDataResponse) returnParamList.get(0));
         return result;
     }
 
@@ -426,6 +400,19 @@ public class BusinessServiceV1Proxy
             throw wrapInvocationException(svcInvocationEx);
         }
         GetHoldingResponse result = ((GetHoldingResponse) returnParamList.get(0));
+        return result;
+    }
+
+    public UpdateWalletDataResponse updateWalletData(UpdateWalletDataRequest param0) {
+        Object[] params = new Object[ 1 ] ;
+        params[ 0 ] = param0;
+        List<Object> returnParamList = new ArrayList<Object>();
+        try {
+            m_service.invoke("updateWalletData", params, returnParamList);
+        } catch (ServiceInvocationException svcInvocationEx) {
+            throw wrapInvocationException(svcInvocationEx);
+        }
+        UpdateWalletDataResponse result = ((UpdateWalletDataResponse) returnParamList.get(0));
         return result;
     }
 
@@ -530,6 +517,19 @@ public class BusinessServiceV1Proxy
             throw wrapInvocationException(svcInvocationEx);
         }
         GetHoldingsResponse result = ((GetHoldingsResponse) returnParamList.get(0));
+        return result;
+    }
+
+    public GetWalletDataResponse getWalletData(GetWalletDataRequest param0) {
+        Object[] params = new Object[ 1 ] ;
+        params[ 0 ] = param0;
+        List<Object> returnParamList = new ArrayList<Object>();
+        try {
+            m_service.invoke("getWalletData", params, returnParamList);
+        } catch (ServiceInvocationException svcInvocationEx) {
+            throw wrapInvocationException(svcInvocationEx);
+        }
+        GetWalletDataResponse result = ((GetWalletDataResponse) returnParamList.get(0));
         return result;
     }
 

@@ -8,7 +8,7 @@ public class ServerRequestFilter extends BaseHandler {
 
 	@Override
 	public void invoke(MessageContext ctx) throws ServiceException {
-		System.out.println("ServerRequest: "+ctx.getRequestId());
+		System.out.println("Server Request: "+ctx.getRequestId());
 	}
 
 }
