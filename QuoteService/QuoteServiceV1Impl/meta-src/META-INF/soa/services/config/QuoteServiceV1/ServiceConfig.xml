@@ -15,7 +15,7 @@
             </indicator>
             <class-name>org.ebayopensource.turmeric.runtime.spf.impl.protocolprocessor.soap.ServerSOAPProtocolProcessor</class-name>
         </protocol-processor>
-        <!-- Tiago: commenting this out for now
+        <!-- Tiago: commenting this out for now-->
         <pipeline-config>
             <request-handlers>
                  <handler name="ServerRequest">
@@ -28,6 +28,6 @@
                  </handler>
              </response-handlers>
          </pipeline-config>
-         -->
+         
     </service-instance-config>
 </service-config>
