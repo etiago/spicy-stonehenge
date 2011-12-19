@@ -33,6 +33,13 @@
       <artifactId>QuoteServiceV1</artifactId>
       <version>1.0.0</version>
     </dependency>
+    <dependency>
+    	<groupId>nl.tudelft.ewi.st.atlantis.tudelft</groupId>
+    	<artifactId>service-filter</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    	<type>jar</type>
+    	<scope>compile</scope>
+    </dependency>
   </dependencies>
   <build>
     <sourceDirectory>src</sourceDirectory>

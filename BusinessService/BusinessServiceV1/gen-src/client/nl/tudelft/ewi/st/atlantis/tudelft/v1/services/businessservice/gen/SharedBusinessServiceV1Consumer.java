@@ -187,14 +187,25 @@ public class SharedBusinessServiceV1Consumer
         return result;
     }
 
-    public Response<RegisterResponse> registerAsync(RegisterRequest param0) {
-        Response<RegisterResponse> result = null;
+    public Response<UpdateWalletDataResponse> updateWalletDataAsync(UpdateWalletDataRequest param0) {
+        Response<UpdateWalletDataResponse> result = null;
         try {
             m_proxy = getProxy();
         } catch (ServiceException serviceException) {
             throw ServiceRuntimeException.wrap(serviceException);
         }
-        result = m_proxy.registerAsync(param0);
+        result = m_proxy.updateWalletDataAsync(param0);
+        return result;
+    }
+
+    public Future<?> updateWalletDataAsync(UpdateWalletDataRequest param0, AsyncHandler<UpdateWalletDataResponse> param1) {
+        Future<?> result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.updateWalletDataAsync(param0, param1);
         return result;
     }
 
@@ -206,6 +217,83 @@ public class SharedBusinessServiceV1Consumer
             throw ServiceRuntimeException.wrap(serviceException);
         }
         result = m_proxy.registerAsync(param0, param1);
+        return result;
+    }
+
+    public Response<RegisterResponse> registerAsync(RegisterRequest param0) {
+        Response<RegisterResponse> result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.registerAsync(param0);
+        return result;
+    }
+
+    public Response<LoginResponse> loginAsync(LoginRequest param0) {
+        Response<LoginResponse> result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.loginAsync(param0);
+        return result;
+    }
+
+    public Future<?> loginAsync(LoginRequest param0, AsyncHandler<LoginResponse> param1) {
+        Future<?> result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.loginAsync(param0, param1);
+        return result;
+    }
+
+    public Response<LogoutResponse> logoutAsync(LogoutRequest param0) {
+        Response<LogoutResponse> result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.logoutAsync(param0);
+        return result;
+    }
+
+    public Future<?> logoutAsync(LogoutRequest param0, AsyncHandler<LogoutResponse> param1) {
+        Future<?> result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.logoutAsync(param0, param1);
+        return result;
+    }
+
+    public Response<GetWalletDataResponse> getWalletDataAsync(GetWalletDataRequest param0) {
+        Response<GetWalletDataResponse> result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.getWalletDataAsync(param0);
+        return result;
+    }
+
+    public Future<?> getWalletDataAsync(GetWalletDataRequest param0, AsyncHandler<GetWalletDataResponse> param1) {
+        Future<?> result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.getWalletDataAsync(param0, param1);
         return result;
     }
 
@@ -231,17 +319,6 @@ public class SharedBusinessServiceV1Consumer
         return result;
     }
 
-    public Future<?> getMarketSummaryAsync(GetMarketSummaryRequest param0, AsyncHandler<GetMarketSummaryResponse> param1) {
-        Future<?> result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.getMarketSummaryAsync(param0, param1);
-        return result;
-    }
-
     public Response<GetMarketSummaryResponse> getMarketSummaryAsync(GetMarketSummaryRequest param0) {
         Response<GetMarketSummaryResponse> result = null;
         try {
@@ -250,6 +327,17 @@ public class SharedBusinessServiceV1Consumer
             throw ServiceRuntimeException.wrap(serviceException);
         }
         result = m_proxy.getMarketSummaryAsync(param0);
+        return result;
+    }
+
+    public Future<?> getMarketSummaryAsync(GetMarketSummaryRequest param0, AsyncHandler<GetMarketSummaryResponse> param1) {
+        Future<?> result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.getMarketSummaryAsync(param0, param1);
         return result;
     }
 
@@ -297,17 +385,6 @@ public class SharedBusinessServiceV1Consumer
         return result;
     }
 
-    public Future<?> getHoldingAsync(GetHoldingRequest param0, AsyncHandler<GetHoldingResponse> param1) {
-        Future<?> result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.getHoldingAsync(param0, param1);
-        return result;
-    }
-
     public Response<GetHoldingResponse> getHoldingAsync(GetHoldingRequest param0) {
         Response<GetHoldingResponse> result = null;
         try {
@@ -319,25 +396,14 @@ public class SharedBusinessServiceV1Consumer
         return result;
     }
 
-    public Future<?> updateWalletDataAsync(UpdateWalletDataRequest param0, AsyncHandler<UpdateWalletDataResponse> param1) {
+    public Future<?> getHoldingAsync(GetHoldingRequest param0, AsyncHandler<GetHoldingResponse> param1) {
         Future<?> result = null;
         try {
             m_proxy = getProxy();
         } catch (ServiceException serviceException) {
             throw ServiceRuntimeException.wrap(serviceException);
         }
-        result = m_proxy.updateWalletDataAsync(param0, param1);
-        return result;
-    }
-
-    public Response<UpdateWalletDataResponse> updateWalletDataAsync(UpdateWalletDataRequest param0) {
-        Response<UpdateWalletDataResponse> result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.updateWalletDataAsync(param0);
+        result = m_proxy.getHoldingAsync(param0, param1);
         return result;
     }
 
@@ -385,25 +451,14 @@ public class SharedBusinessServiceV1Consumer
         return result;
     }
 
-    public Future<?> logoutAsync(LogoutRequest param0, AsyncHandler<LogoutResponse> param1) {
-        Future<?> result = null;
+    public Response<GetTopOrdersResponse> getTopOrdersAsync(GetTopOrdersRequest param0) {
+        Response<GetTopOrdersResponse> result = null;
         try {
             m_proxy = getProxy();
         } catch (ServiceException serviceException) {
             throw ServiceRuntimeException.wrap(serviceException);
         }
-        result = m_proxy.logoutAsync(param0, param1);
-        return result;
-    }
-
-    public Response<LogoutResponse> logoutAsync(LogoutRequest param0) {
-        Response<LogoutResponse> result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.logoutAsync(param0);
+        result = m_proxy.getTopOrdersAsync(param0);
         return result;
     }
 
@@ -418,14 +473,14 @@ public class SharedBusinessServiceV1Consumer
         return result;
     }
 
-    public Response<GetTopOrdersResponse> getTopOrdersAsync(GetTopOrdersRequest param0) {
-        Response<GetTopOrdersResponse> result = null;
+    public Response<GetAccountProfileDataResponse> getAccountProfileDataAsync(GetAccountProfileDataRequest param0) {
+        Response<GetAccountProfileDataResponse> result = null;
         try {
             m_proxy = getProxy();
         } catch (ServiceException serviceException) {
             throw ServiceRuntimeException.wrap(serviceException);
         }
-        result = m_proxy.getTopOrdersAsync(param0);
+        result = m_proxy.getAccountProfileDataAsync(param0);
         return result;
     }
 
@@ -437,17 +492,6 @@ public class SharedBusinessServiceV1Consumer
             throw ServiceRuntimeException.wrap(serviceException);
         }
         result = m_proxy.getAccountProfileDataAsync(param0, param1);
-        return result;
-    }
-
-    public Response<GetAccountProfileDataResponse> getAccountProfileDataAsync(GetAccountProfileDataRequest param0) {
-        Response<GetAccountProfileDataResponse> result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.getAccountProfileDataAsync(param0);
         return result;
     }
 
@@ -517,28 +561,6 @@ public class SharedBusinessServiceV1Consumer
         return result;
     }
 
-    public Response<LoginResponse> loginAsync(LoginRequest param0) {
-        Response<LoginResponse> result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.loginAsync(param0);
-        return result;
-    }
-
-    public Future<?> loginAsync(LoginRequest param0, AsyncHandler<LoginResponse> param1) {
-        Future<?> result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.loginAsync(param0, param1);
-        return result;
-    }
-
     public Response<GetHoldingsResponse> getHoldingsAsync(GetHoldingsRequest param0) {
         Response<GetHoldingsResponse> result = null;
         try {
@@ -558,28 +580,6 @@ public class SharedBusinessServiceV1Consumer
             throw ServiceRuntimeException.wrap(serviceException);
         }
         result = m_proxy.getHoldingsAsync(param0, param1);
-        return result;
-    }
-
-    public Response<GetWalletDataResponse> getWalletDataAsync(GetWalletDataRequest param0) {
-        Response<GetWalletDataResponse> result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.getWalletDataAsync(param0);
-        return result;
-    }
-
-    public Future<?> getWalletDataAsync(GetWalletDataRequest param0, AsyncHandler<GetWalletDataResponse> param1) {
-        Future<?> result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.getWalletDataAsync(param0, param1);
         return result;
     }
 
@@ -613,6 +613,50 @@ public class SharedBusinessServiceV1Consumer
             throw ServiceRuntimeException.wrap(serviceException);
         }
         result = m_proxy.register(param0);
+        return result;
+    }
+
+    public LoginResponse login(LoginRequest param0) {
+        LoginResponse result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.login(param0);
+        return result;
+    }
+
+    public LogoutResponse logout(LogoutRequest param0) {
+        LogoutResponse result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.logout(param0);
+        return result;
+    }
+
+    public UpdateWalletDataResponse updateWalletData(UpdateWalletDataRequest param0) {
+        UpdateWalletDataResponse result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.updateWalletData(param0);
+        return result;
+    }
+
+    public GetWalletDataResponse getWalletData(GetWalletDataRequest param0) {
+        GetWalletDataResponse result = null;
+        try {
+            m_proxy = getProxy();
+        } catch (ServiceException serviceException) {
+            throw ServiceRuntimeException.wrap(serviceException);
+        }
+        result = m_proxy.getWalletData(param0);
         return result;
     }
 
@@ -671,17 +715,6 @@ public class SharedBusinessServiceV1Consumer
         return result;
     }
 
-    public UpdateWalletDataResponse updateWalletData(UpdateWalletDataRequest param0) {
-        UpdateWalletDataResponse result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.updateWalletData(param0);
-        return result;
-    }
-
     public SellEnhancedResponse sellEnhanced(SellEnhancedRequest param0) {
         SellEnhancedResponse result = null;
         try {
@@ -701,17 +734,6 @@ public class SharedBusinessServiceV1Consumer
             throw ServiceRuntimeException.wrap(serviceException);
         }
         result = m_proxy.updateAccountProfile(param0);
-        return result;
-    }
-
-    public LogoutResponse logout(LogoutRequest param0) {
-        LogoutResponse result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.logout(param0);
         return result;
     }
 
@@ -770,17 +792,6 @@ public class SharedBusinessServiceV1Consumer
         return result;
     }
 
-    public LoginResponse login(LoginRequest param0) {
-        LoginResponse result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.login(param0);
-        return result;
-    }
-
     public GetHoldingsResponse getHoldings(GetHoldingsRequest param0) {
         GetHoldingsResponse result = null;
         try {
@@ -789,17 +800,6 @@ public class SharedBusinessServiceV1Consumer
             throw ServiceRuntimeException.wrap(serviceException);
         }
         result = m_proxy.getHoldings(param0);
-        return result;
-    }
-
-    public GetWalletDataResponse getWalletData(GetWalletDataRequest param0) {
-        GetWalletDataResponse result = null;
-        try {
-            m_proxy = getProxy();
-        } catch (ServiceException serviceException) {
-            throw ServiceRuntimeException.wrap(serviceException);
-        }
-        result = m_proxy.getWalletData(param0);
         return result;
     }
 

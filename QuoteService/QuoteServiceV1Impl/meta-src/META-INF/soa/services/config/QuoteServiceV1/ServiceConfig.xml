@@ -15,5 +15,12 @@
             </indicator>
             <class-name>org.ebayopensource.turmeric.runtime.spf.impl.protocolprocessor.soap.ServerSOAPProtocolProcessor</class-name>
         </protocol-processor>
+        <pipeline-config>
+            <response-handlers>
+                 <handler name="FilterHand">
+                     <class-name>nl.tudelft.ewi.st.atlantis.v1.services.tools.filters.AsyncClientReqHandler</class-name>
+                 </handler>
+             </response-handlers>
+         </pipeline-config>
     </service-instance-config>
 </service-config>
