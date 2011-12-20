@@ -18,9 +18,7 @@
 package nl.tudelft.ewi.st.atlantis.tudelft.v1.services.businessservice.impl;
 
 import java.math.BigDecimal;
-import java.net.URL;
 
-import java.util.Calendar;
 import java.util.List;
 
 import nl.tudelft.ewi.st.atlantis.tudelft.v1.services.SubmitOrderRequest;
