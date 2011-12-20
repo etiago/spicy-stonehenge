@@ -8,9 +8,9 @@
 	http://www.apache.org/licenses/LICENSE-2.0
 	
 -->
-<wsdl:definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://atlantis.st.ewi.tudelft.nl/v1/services" xmlns:types="http://atlantis.st.ewi.tudelft.nl/tudelft/external/v1/types" xmlns:types1="http://www.ebayopensource.org/turmeric/common/v1/types" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" name="QuoteService" targetNamespace="http://atlantis.st.ewi.tudelft.nl/v1/services">
+<wsdl:definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://atlantis.st.ewi.tudelft.nl/tudelft/v1/services" xmlns:types="http://atlantis.st.ewi.tudelft.nl/tudelft/external/v1/types" xmlns:types1="http://www.ebayopensource.org/turmeric/common/v1/types" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" name="QuoteService" targetNamespace="http://atlantis.st.ewi.tudelft.nl/tudelft/v1/services">
 	<wsdl:types>
-		<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://atlantis.st.ewi.tudelft.nl/v1/services">
+		<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://atlantis.st.ewi.tudelft.nl/tudelft/v1/services">
 <xs:import namespace="http://atlantis.st.ewi.tudelft.nl/tudelft/external/v1/types"/>
 <xs:import namespace="http://www.ebayopensource.org/turmeric/common/v1/types"/>
 			
@@ -365,7 +365,7 @@
 	<wsdl:binding name="QuoteServiceSOAPBinding" type="tns:QuoteServicePort">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<wsdl:operation name="getQuotes">
-			<soap:operation soapAction="http://atlantis.st.ewi.tudelft.nl/v1/services/getQuotes"/>
+			<soap:operation soapAction="http://atlantis.st.ewi.tudelft.nl/tudelft/v1/services/getQuotes"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>
