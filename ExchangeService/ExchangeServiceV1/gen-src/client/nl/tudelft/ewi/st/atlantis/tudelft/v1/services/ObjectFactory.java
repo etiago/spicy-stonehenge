@@ -37,11 +37,43 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CheckCurrencyReponse }
+     * Create an instance of {@link CheckCurrency }
      * 
      */
-    public CheckCurrencyReponse createCheckCurrencyReponse() {
-        return new CheckCurrencyReponse();
+    public CheckCurrency createCheckCurrency() {
+        return new CheckCurrency();
+    }
+
+    /**
+     * Create an instance of {@link CheckCurrencyResponse }
+     * 
+     */
+    public CheckCurrencyResponse createCheckCurrencyResponse() {
+        return new CheckCurrencyResponse();
+    }
+
+    /**
+     * Create an instance of {@link CheckCurrencyRequest }
+     * 
+     */
+    public CheckCurrencyRequest createCheckCurrencyRequest() {
+        return new CheckCurrencyRequest();
+    }
+
+    /**
+     * Create an instance of {@link ExchangeCurrencyRequest }
+     * 
+     */
+    public ExchangeCurrencyRequest createExchangeCurrencyRequest() {
+        return new ExchangeCurrencyRequest();
+    }
+
+    /**
+     * Create an instance of {@link UpdateWalletDataRequest }
+     * 
+     */
+    public UpdateWalletDataRequest createUpdateWalletDataRequest() {
+        return new UpdateWalletDataRequest();
     }
 
     /**
@@ -61,19 +93,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CheckCurrencyRequest }
+     * Create an instance of {@link CheckAmountResponse }
      * 
      */
-    public CheckCurrencyRequest createCheckCurrencyRequest() {
-        return new CheckCurrencyRequest();
-    }
-
-    /**
-     * Create an instance of {@link CheckCurrency }
-     * 
-     */
-    public CheckCurrency createCheckCurrency() {
-        return new CheckCurrency();
+    public CheckAmountResponse createCheckAmountResponse() {
+        return new CheckAmountResponse();
     }
 
     /**
@@ -85,35 +109,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CheckCurrencyResponse }
+     * Create an instance of {@link CheckCurrencyReponse }
      * 
      */
-    public CheckCurrencyResponse createCheckCurrencyResponse() {
-        return new CheckCurrencyResponse();
-    }
-
-    /**
-     * Create an instance of {@link UpdateWalletDataRequest }
-     * 
-     */
-    public UpdateWalletDataRequest createUpdateWalletDataRequest() {
-        return new UpdateWalletDataRequest();
-    }
-
-    /**
-     * Create an instance of {@link CheckAmountResponse }
-     * 
-     */
-    public CheckAmountResponse createCheckAmountResponse() {
-        return new CheckAmountResponse();
-    }
-
-    /**
-     * Create an instance of {@link ExchangeCurrencyRequest }
-     * 
-     */
-    public ExchangeCurrencyRequest createExchangeCurrencyRequest() {
-        return new ExchangeCurrencyRequest();
+    public CheckCurrencyReponse createCheckCurrencyReponse() {
+        return new CheckCurrencyReponse();
     }
 
     /**

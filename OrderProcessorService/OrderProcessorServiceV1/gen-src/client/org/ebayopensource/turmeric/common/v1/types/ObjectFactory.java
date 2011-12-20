@@ -30,11 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ErrorParameter }
+     * Create an instance of {@link ErrorMessage }
      * 
      */
-    public ErrorParameter createErrorParameter() {
-        return new ErrorParameter();
+    public ErrorMessage createErrorMessage() {
+        return new ErrorMessage();
     }
 
     /**
@@ -62,11 +62,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ErrorMessage }
+     * Create an instance of {@link ErrorParameter }
      * 
      */
-    public ErrorMessage createErrorMessage() {
-        return new ErrorMessage();
+    public ErrorParameter createErrorParameter() {
+        return new ErrorParameter();
     }
 
 }
