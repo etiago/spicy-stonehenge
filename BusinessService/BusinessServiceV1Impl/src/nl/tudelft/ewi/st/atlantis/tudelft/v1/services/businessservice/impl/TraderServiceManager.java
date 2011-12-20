@@ -20,6 +20,7 @@ package nl.tudelft.ewi.st.atlantis.tudelft.v1.services.businessservice.impl;
 import java.math.BigDecimal;
 import java.net.URL;
 
+import java.util.Calendar;
 import java.util.List;
 
 import nl.tudelft.ewi.st.atlantis.tudelft.v1.services.SubmitOrderRequest;
@@ -204,7 +205,6 @@ public class TraderServiceManager {
 					holding);
 
 			SharedOrderProcessorServiceV1Consumer asynClient = new SharedOrderProcessorServiceV1Consumer("BusinessService","production");
-			asynClient.getService().setServiceLocation(new URL("http://localhost:8080/orderprocessor/OrderProcessorServiceV1"));
 			
 			SubmitOrderRequest request = new SubmitOrderRequest();
 			request.setData(TypeFactory.toOrderData(order));

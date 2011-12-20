@@ -44,7 +44,7 @@ public class OrderProcessorServiceV1Impl implements OrderProcessorServiceV1
 		// accepted header
 		
     	// Tiago: Not sure we need this. taking it out
-    	// OrderProcessorUtility.pauseForTwoSeconds();
+    	//Thread.sleep(2 * 1000);
     	
     	
 		orderProcessManager.processAndCompleteOrder(queueOrder);
