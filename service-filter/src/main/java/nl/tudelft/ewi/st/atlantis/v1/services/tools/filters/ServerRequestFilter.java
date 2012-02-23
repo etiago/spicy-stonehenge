@@ -18,11 +18,12 @@ import org.ebayopensource.turmeric.runtime.common.impl.handlers.BaseHandler;
 import org.ebayopensource.turmeric.runtime.common.pipeline.MessageContext;
 
 
-public class ServerRequestFilter extends Filter {
+public class ServerRequestFilter extends BaseHandler {
 	private static Log logger = LogFactory.getLog(ServerRequestFilter.class);
 
 	@Override
 	public void invoke(MessageContext ctx) throws ServiceException {
+		
 //		//logger.debug(contextToString(ctx));
 //		if(ctx.getProperty("tud") != null){
 //			logger.debug("[REQ] Service: "+ ctx.getAdminName()+" | TUD: "+ctx.getProperty("tud"));
