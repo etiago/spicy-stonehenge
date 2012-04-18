@@ -45,7 +45,7 @@ public class StockGrabber {
     static {
         try {
             c = DriverManager.getConnection(
-                                        "jdbc:derby://localhost:1527/stonehenge");
+                                        "jdbc:derby://localhost:1527/quotes");
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
