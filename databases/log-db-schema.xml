@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE database SYSTEM "http://db.apache.org/torque/dtd/database">
+  <database name="MigrateTest">
+    <table name="PAIR">
+      <column name="REQUESTID" primaryKey="true" required="true" type="VARCHAR" size="36" autoIncrement="false"/>
+      <column name="TIMESTAMP" primaryKey="true" required="true" type="TIMESTAMP" size="29,9" autoIncrement="false"/>
+      <column name="CONSUMER" primaryKey="false" required="true" type="VARCHAR" size="255" autoIncrement="false"/>
+      <column name="CONSUMER_METHOD" primaryKey="false" required="true" type="VARCHAR" size="255" autoIncrement="false"/>
+      <column name="SERVICE" primaryKey="false" required="true" type="VARCHAR" size="255" autoIncrement="false"/>
+      <column name="SERVICE_METHOD" primaryKey="false" required="true" type="VARCHAR" size="255" autoIncrement="false"/>
+      <column name="CONSUMER_IP" primaryKey="false" required="true" type="VARCHAR" size="15" autoIncrement="false"/>
+      <column name="SERVICE_IP" primaryKey="false" required="true" type="VARCHAR" size="15" autoIncrement="false"/>
+    </table>
+    <table name="STATICINFO">
+      <column name="ID" primaryKey="true" required="true" type="INTEGER" size="10" autoIncrement="true"/>
+      <column name="JSON_DATA" primaryKey="false" required="true" type="LONGVARCHAR" size="32700" autoIncrement="false"/>
+      <column name="MD5" primaryKey="false" required="true" type="VARCHAR" size="32" autoIncrement="false"/>
+      <unique name="SQL120305160423151">
+        <unique-column name="MD5"/>
+      </unique>
+    </table>
+    <table name="STATICINFO_TIME">
+      <column name="STATICINFO_ID" primaryKey="true" required="true" type="INTEGER" size="10" autoIncrement="false"/>
+      <column name="TSTAMP" primaryKey="true" required="true" type="TIMESTAMP" size="29,9" autoIncrement="false"/>
+    </table>
+  </database>
