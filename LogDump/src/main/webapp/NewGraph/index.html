@@ -2,12 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Untitled Document</title>
-<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
-		<script src="js/raphael-min.js" type="text/javascript" charset="utf-8"></script>
+<title>Serviz</title>
+		<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.19.custom.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/base/jquery.ui.base.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+
+		<link rel="stylesheet" href="css/jquery.qtip.min.css" type="text/css" media="screen">
+
+		<script src="js/raphael.js" type="text/javascript" charset="utf-8"></script>
         <script src="js/graffle.js" type="text/javascript" charset="utf-8"></script>
-        <script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+        
+ 
+        <script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/jquery-ui-1.8.19.custom.min.js" type="text/javascript"></script>
+       	<script src="js/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+
         <script src="js/timeline.js" type="text/javascript"></script>
+        
+        <script src="js/jquery.qtip.min.js" type="text/javascript"></script>
+        
         <script src="http://static.simile.mit.edu/timeline/api-2.3.0/timeline-api.js?bundle=true" type="text/javascript"></script>
         <script type="text/javascript">
 			window.onload = function() {
@@ -16,12 +29,170 @@
 				json = getJSONTimelineData();
 				loadTimeline(json);
 			}
+			
+			$(document).ready(function() {
+				// Configure the datepickers
+				$('#datestart').datetimepicker({
+				    onClose: function(dateText, inst) {
+				        var endDateTextBox = $('#dateend');
+				        if (endDateTextBox.val() != '') {
+				            var testStartDate = new Date(dateText);
+				            var testEndDate = new Date(endDateTextBox.val());
+				            if (testStartDate > testEndDate)
+				                endDateTextBox.val(dateText);
+				        }
+				        else {
+				            endDateTextBox.val(dateText);
+				        }
+				    },
+				    onSelect: onDateChanged
+				});
+				$('#dateend').datetimepicker({
+				    onClose: function(dateText, inst) {
+				        var startDateTextBox = $('#datestart');
+				        if (startDateTextBox.val() != '') {
+				            var testStartDate = new Date(startDateTextBox.val());
+				            var testEndDate = new Date(dateText);
+				            if (testStartDate > testEndDate)
+				                startDateTextBox.val(dateText);
+				        }
+				        else {
+				            startDateTextBox.val(dateText);
+				        }
+				    },
+				    onSelect: onDateChanged
+				});
+				
+				$('#datestart')
+					.removeData('qtip') 
+					.qtip({
+						content: {
+							text: 'Please select a start and end dates', 
+							title: {
+								text: 'Hint',
+								button: true
+							}
+						},
+						position: {
+							my: 'bottom left', // Use the corner...
+							at: 'top right' // ...and opposite corner
+						},
+						show: {
+							event: false, // Don't specify a show event...
+							ready: true // ... but show the tooltip when ready
+						},
+						hide: false, // Don't specify a hide event either!
+						style: {
+							classes: 'ui-tooltip-shadow ui-tooltip-green'
+						}
+					});
+				$('#holder')
+					.removeData('qtip') 
+					.qtip({
+						content: {
+							text: 'Here you can visualize the relationships between services', 
+							title: {
+								text: 'Hint',
+								button: true
+							}
+						},
+						position: {
+							my: 'bottom left', // Use the corner...
+							at: 'top right' // ...and opposite corner
+						},
+						show: {
+							event: false, // Don't specify a show event...
+							ready: true // ... but show the tooltip when ready
+						},
+						hide: false, // Don't specify a hide event either!
+						style: {
+							classes: 'ui-tooltip-shadow ui-tooltip-green'
+						}
+					});
+				// Fix for the datepicker weirdness at the bottom of the page
+				$('#ui-datepicker-div').css('display','none');
+            });
+			
+			var decoratorUp;
+			var decoratorDown;
+
+			var selectionEvent;
+			function onDateChanged() {
+				// Housekeeping to make sure the user sets correct dates
+				if (this.id == "datestart") {
+					var start = $(this).datetimepicker('getDate');
+				    $('#dateend').datetimepicker('option', 'minDate', new Date(start.getTime()));
+				} else if (this.id == "dateend") {
+					var end = $(this).datetimepicker('getDate');
+				    $('#datestart').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
+				}
+
+	            var dateStart = new Date($("#datestart").val());
+	            var dateEnd = new Date($("#dateend").val());
+	            
+	            // Make sure the dates are valid (i.e. the user didn't mess them manually')
+	            if ( Object.prototype.toString.call(dateStart) === "[object Date]" ) {
+					  if ( isNaN( dateStart.getTime() ) ) {  // d.valueOf() could also work
+					  	return;
+					  }
+				} else {
+					return;
+				}
+				
+				if ( Object.prototype.toString.call(dateEnd) === "[object Date]" ) {
+					  if ( isNaN( dateEnd.getTime() ) ) {  // d.valueOf() could also work
+					  	return;
+					  }
+				} else {
+					return;
+				}
+				
+				// Should not happen, preventing user from doing it
+				if (dateStart > dateEnd) {
+					return;
+				}
+				
+				// Create a theme for the highlight
+				var theme = Timeline.ClassicTheme.create();
+	            theme.event.bubble.width = 250;
+	
+				// If both decorators are null, it's the first time, create them
+	            if (decoratorUp == null || decoratorDown == null) {
+		            decoratorUp = new Timeline.SpanHighlightDecorator({
+					                        startDate:  dateStart,
+					                        endDate:    dateEnd,
+					                        color:      "#FFC080", // set color explicitly
+					                        opacity:    50,
+					                        startLabel: "Start",
+					                        endLabel:   "End",
+					                        theme:      theme
+					                   });
+					
+					decoratorDown = jQuery.extend(true, {}, decoratorUp);
+	
+					tl.getBand(0).addDecorator(decoratorUp);
+					tl.getBand(1).addDecorator(decoratorDown);
+				} else {
+					decoratorUp._startDate = dateStart;
+					decoratorUp._endDate = dateEnd;
+					decoratorUp.paint();
+					
+					decoratorDown._startDate = dateStart;
+					decoratorDown._endDate = dateEnd;
+					decoratorDown.paint();
+				}
+			}
+
         </script>
 </head>
 
 <body >
-<div id="title">HengeViz</div>
+<div id="title">Serviz</div>
 <div id="holder"></div>
+<div id="pickers">
+	Start: <input type="text" id="datestart" name="datestart" value="" /><br />
+	End: <input type="text" id="dateend" name="dateend" value="" /><br />
+</div>
 <div id="slider" class="dark-theme"></div>
 <noscript>
 This page uses Javascript to show you a Timeline. Please enable Javascript in your browser to see the full page. Thank you.

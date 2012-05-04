@@ -132,44 +132,53 @@ Raphael.fn.connection = function (obj1, obj2, line, bg) {
 //};
 connections = [];
 
-onstart = function () {
-	this.xBox = this.attr("x");
-	this.yBox = this.attr("y");
+onstart = function (obj) {
+	if (obj==null || obj.type != 'rect' ) obj = this;
 	
-	this.xText = this.text.attr("x");
-	this.yText = this.text.attr("y");
+	obj.xBox = obj.attr("x");
+	obj.yBox = obj.attr("y");
 	
-	this.animate({"fill-opacity": .8}, 500);
+	obj.xText = obj.text.attr("x");
+	obj.yText = obj.text.attr("y");
+	
+	obj.animate({"fill-opacity": .8}, 500);
 };
 
-onmove = function (dx, dy) {
+gMove = function (dx,dy,obj) {
+	if (obj==null || obj.type != 'rect' ) obj = this;
 	//alert("a");
 	//this.x = this.ox + dx;
 	//this.y = this.oy + dy;
-	this.attr({x: this.xBox + dx, y: this.yBox + dy});
+	obj.attr({x: obj.xBox + dx, y: obj.yBox + dy});
 	
-	this.text.attr({x: this.xText + dx, y: this.yText + dy});
+	obj.text.attr({x: obj.xText + dx, y: obj.yText + dy});
 	for (var i = connections.length; i--;) {
 		paper.connection(connections[i]);
 	}			
 	
 	var i = 0;
-	for(var p in this.methods) {
-		var x = this.xBox +10+ dx;
-		var y = this.yBox + this.attr("height") + i*20 + 5 + dy;
-		this.methods[p].attr({x:x, y:y});
+	for(var p in obj.methods) {
+		var x = obj.xBox +10+ dx;
+		var y = obj.yBox + obj.attr("height") + i*20 + 5 + dy;
+		obj.methods[p].attr({x:x, y:y});
 		
-		var centerX = ((this.methods[p].attr("width") - this.methods[p].text.attr("width")) / 2)+x;
-		var centerY = ((this.methods[p].attr("height") - this.methods[p].text.attr("height")) / 2)+y;
-		this.methods[p].text.attr({x:centerX, y:centerY});	
+		var centerX = ((obj.methods[p].attr("width") - obj.methods[p].text.attr("width")) / 2)+x;
+		var centerY = ((obj.methods[p].attr("height") - obj.methods[p].text.attr("height")) / 2)+y;
+		obj.methods[p].text.attr({x:centerX, y:centerY});	
 		i++;
 	}
 	
 	paper.safari();
+}
+
+onmove = function (dx, dy) {
+	gMove(dx,dy,this);
 };
 
-onend = function () {
-	this.animate({"fill-opacity": 100}, 500);
+onend = function (obj) {
+	if (obj==null || obj.type != 'rect' ) obj = this;
+
+	obj.animate({"fill-opacity": 100}, 500);
 };
 
 // Prototype to create a boxWithText	
@@ -193,6 +202,12 @@ Raphael.fn.boxWithText = function(x, y, width, height, text) {
 		// only works if directly dragged
 		//this.methods[methodName].drag(onmove,onstart,onend);
 		
+	}
+	
+	box.move = function(dx,dy) {
+		onstart(this);
+		gMove(dx,dy,this);
+		onend(this);
 	}
 	
 	var text = paper.text(x + width/2,y + height/2, text);
@@ -248,6 +263,7 @@ function loadRaphael () {
 			  	consumer = elements[pair.CONSUMER];
 			  } else {
 				  consumer = paper.boxWithText(posX, posY, width, height, pair.CONSUMER);
+				  //consumer.move(100,100);
 				  consumer.drag(onmove, onstart, onend);
 				  consumer.attr({fill: color, "fill-opacity": 100, "stroke-width": 2, cursor: "move"});
 				  
@@ -261,6 +277,8 @@ function loadRaphael () {
 				service = elements[pair.SERVICE];  
 			  } else {
 				  service = paper.boxWithText(posX+100, posY, width, height, pair.SERVICE);
+				  //service.move(100,100);
+
 				  service.drag(onmove, onstart, onend);
 				  service.attr({fill: color, "fill-opacity": 100, "stroke-width": 2, cursor: "move"});
 				  
@@ -273,6 +291,9 @@ function loadRaphael () {
 		
 		 
 		});
+		// var paperDom = paper.canvas;
+    	// paperDom.parentNode.removeChild(paperDom);
+    	
 		////var rect = r.rect(posX, posY, width, height, 2);
 //		var rect = paper.boxWithText(posX, posY, width, height, "hello");
 //		var rect2 = paper.boxWithText(posX+100, posY, width, height, "world");

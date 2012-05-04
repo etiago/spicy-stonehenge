@@ -11,9 +11,12 @@
 	return "bo";
  }
  
+ var eventSource;
+ var bandInfos;
+ 
  function loadTimeline(jsonData) {
- 	   var eventSource = new Timeline.DefaultEventSource();
-   var bandInfos = [
+ 	   eventSource =  new Timeline.DefaultEventSource();
+   bandInfos = [
      Timeline.createBandInfo({
      	eventSource:	eventSource,
          width:          "70%", 
@@ -29,9 +32,18 @@
 	   ];
 	   bandInfos[1].syncWith = 0;
 	   bandInfos[1].highlight = true;
+	   
+	   Timeline._Band.prototype.addDecorator = function(decorator) { 
+	        this._decorators.push(decorator); 
+	        decorator.initialize(this,this._timeline); 
+	        decorator.paint(); 
+		}; 
+		
 	   tl = Timeline.create(document.getElementById("slider"), bandInfos);
 	   
 	      Timeline.loadJSON("temp.json", function(json, url) { eventSource.loadJSON(json, document.location.href); });
+	      
+	      
 
  }
 
