@@ -30,7 +30,7 @@
 				loadTimeline(json);
 			}
 			
-			$(document).ready(function() {
+			function initializeDateTimePickers() {
 				// Configure the datepickers
 				$('#datestart').datetimepicker({
 				    onClose: function(dateText, inst) {
@@ -63,6 +63,11 @@
 				    onSelect: onDateChanged
 				});
 				
+							// Fix for the datepicker weirdness at the bottom of the page
+				$('#ui-datepicker-div').css('display','none');
+			}
+			
+			function initializeQTip() {
 				$('#datestart')
 					.removeData('qtip') 
 					.qtip({
@@ -97,8 +102,8 @@
 							}
 						},
 						position: {
-							my: 'bottom left', // Use the corner...
-							at: 'top right' // ...and opposite corner
+							my: 'middle left', // Use the corner...
+							at: 'middle right' // ...and opposite corner
 						},
 						show: {
 							event: false, // Don't specify a show event...
@@ -109,8 +114,35 @@
 							classes: 'ui-tooltip-shadow ui-tooltip-green'
 						}
 					});
-				// Fix for the datepicker weirdness at the bottom of the page
-				$('#ui-datepicker-div').css('display','none');
+					
+				$('#holder')
+					.removeData('qtip') 
+					.qtip({
+						content: {
+							text: 'You can go ahead and pick a date range in order to load some data...', 
+							title: {
+								text: 'By the way...',
+								button: true
+							}
+						},
+						position: {
+							my: 'center', // Use the corner...
+							at: 'center' // ...and opposite corner
+						},
+						show: {
+							event: false, // Don't specify a show event...
+							ready: true // ... but show the tooltip when ready
+						},
+						hide: false, // Don't specify a hide event either!
+						style: {
+							classes: 'ui-tooltip-shadow ui-tooltip-blue'
+						}
+					});
+			}
+			
+			$(document).ready(function() {
+				initializeDateTimePickers();
+				initializeQTip();
             });
 			
 			var decoratorUp;
@@ -181,6 +213,8 @@
 					decoratorDown._endDate = dateEnd;
 					decoratorDown.paint();
 				}
+				
+				reloadGraph(dateStart, dateEnd);
 			}
 
         </script>
@@ -189,9 +223,11 @@
 <body >
 <div id="title">Serviz</div>
 <div id="holder"></div>
-<div id="pickers">
-	Start: <input type="text" id="datestart" name="datestart" value="" /><br />
-	End: <input type="text" id="dateend" name="dateend" value="" /><br />
+<div id="menu">
+	<div id="pickers">
+		Start: <input type="text" id="datestart" name="datestart" value="" /><br />
+		End: <input type="text" id="dateend" name="dateend" value="" /><br />
+	</div>
 </div>
 <div id="slider" class="dark-theme"></div>
 <noscript>

@@ -238,15 +238,42 @@ Raphael.fn.boxWithText = function(x, y, width, height, text) {
 function loadRaphael () {
 	    
 		
-		paper = Raphael("holder", 1024, 768);
+		paper = Raphael("holder", 1024, 768);		
+// 		
+// 		 
+		// });
 		
-		
+    	
+		////var rect = r.rect(posX, posY, width, height, 2);
+//		var rect = paper.boxWithText(posX, posY, width, height, "hello");
+//		var rect2 = paper.boxWithText(posX+100, posY, width, height, "world");
+//
+//		//rect.children = [];
+//		//rect.children[0] = r.text(posX + width/2,posY + height/2, "hello");
+//		
+//		var color = Raphael.getColor();
+//		
+//		rect.drag(onmove, onstart, onend);
+//		rect.attr({fill: color, stroke: color, "fill-opacity": 100, "stroke-width": 2, cursor: "move"});
+//		
+//		rect2.drag(onmove, onstart, onend);
+//		rect2.attr({fill: color, stroke: color, "fill-opacity": 100, "stroke-width": 2, cursor: "move"});
+//		
+//		connections.push(paper.connection(rect, rect2, "#fff", "#fff|2"));
+}
+
+function reloadGraph(dateStart, dateEnd) {
+		var paperDom = paper.canvas;
+    	paperDom.parentNode.removeChild(paperDom);
+		paper = Raphael("holder", 1024, 768);		
+
 		var posX = 290;
 		var posY = 180;
 		var width = 60;
 		var height = 40;
+		var url = 'http://hamlet.st.ewi.tudelft.nl:8080/logdump/logdump?timestart='+dateStart.getTime()+'&timeend='+dateEnd.getTime();
 		
-		$.getJSON('test.json', function(doc) {
+		$.getJSON(url, function(doc) {
 		  
 		  var elements = new Object();
 
@@ -288,26 +315,7 @@ function loadRaphael () {
 			  
 			  connections.push(paper.connection(consMeth, servMeth, "#fff", "#fff|"+pair.CNT));
 		  });
-		
-		 
-		});
-		// var paperDom = paper.canvas;
-    	// paperDom.parentNode.removeChild(paperDom);
-    	
-		////var rect = r.rect(posX, posY, width, height, 2);
-//		var rect = paper.boxWithText(posX, posY, width, height, "hello");
-//		var rect2 = paper.boxWithText(posX+100, posY, width, height, "world");
-//
-//		//rect.children = [];
-//		//rect.children[0] = r.text(posX + width/2,posY + height/2, "hello");
-//		
-//		var color = Raphael.getColor();
-//		
-//		rect.drag(onmove, onstart, onend);
-//		rect.attr({fill: color, stroke: color, "fill-opacity": 100, "stroke-width": 2, cursor: "move"});
-//		
-//		rect2.drag(onmove, onstart, onend);
-//		rect2.attr({fill: color, stroke: color, "fill-opacity": 100, "stroke-width": 2, cursor: "move"});
-//		
-//		connections.push(paper.connection(rect, rect2, "#fff", "#fff|2"));
+	});
+	
+	$("#holder").qtip("destroy");
 }

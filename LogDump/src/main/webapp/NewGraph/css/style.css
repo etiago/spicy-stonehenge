@@ -36,6 +36,25 @@ body {
 	margin: auto;
 }
 
+#menu {
+	background: #444;
+	top: 723px;
+	left: 228px;
+	position: absolute;
+	width: 200px;
+	height: 100px;
+	padding: 5px;
+	text-align: right;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#menu input {
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
 .dark-theme { color: #eee; }
         .dark-theme .timeline-band-0 .timeline-ether-bg { background-color: #333 }
         .dark-theme .timeline-band-1 .timeline-ether-bg { background-color: #111 }
