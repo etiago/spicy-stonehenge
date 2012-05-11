@@ -65,7 +65,7 @@ public class LogDumper extends HttpServlet {
 	}
 	
 	private String getStaticInfo(Connection c, Timestamp tStart, Timestamp tEnd) throws SQLException, JSONException {
-		String sql = "SELECT json_data, tstamp " +
+		String sql = "SELECT si.id, json_data, tstamp " +
 					 "FROM staticinfo as si INNER JOIN staticinfo_time as sit ON si.id = sit.staticinfo_id "+
 					 "WHERE tstamp >= ? AND tstamp <= ?";
 		
@@ -79,7 +79,7 @@ public class LogDumper extends HttpServlet {
 		JSONObject obj = new JSONObject();
 		
 		while(rs.next()) {
-			obj.append(String.valueOf(rs.getTimestamp("tstamp").getTime()), new JSONArray(rs.getString("json_data")));
+			obj.append(String.valueOf(rs.getTimestamp("tstamp").getTime()), new JSONArray(rs.getString("json_data")).put(rs.getInt("si.id")));
 		}
 		
 		return obj.toString();

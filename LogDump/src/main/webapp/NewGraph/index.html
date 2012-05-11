@@ -21,13 +21,23 @@
         
         <script src="js/jquery.qtip.min.js" type="text/javascript"></script>
         
-        <script src="http://static.simile.mit.edu/timeline/api-2.3.0/timeline-api.js?bundle=true" type="text/javascript"></script>
-        <script type="text/javascript">
+        <script src="js/serviz.js" type="text/javascript"></script>
+        
+        <!--<script src="http://static.simile.mit.edu/timeline/api-2.3.0/timeline-api.js?bundle=true" type="text/javascript"></script>-->
+        <script src="timeline_js/timeline-api.js?bundle=true" type="text/javascript"></script>
+        <!--<script src="timeline_js/timeline-bundle.js" type="text/javascript"></script>
+        <script src="timeline_ajax/simile-ajax-api.js" type="text/javascript"></script>
+        <script src="timeline_ajax/simile-ajax-bundle.js" type="text/javascript"></script>-->
+        
+		<script type="text/javascript">
 			window.onload = function() {
 				loadRaphael();
-				
+				loadTimeline();
 				json = getJSONTimelineData();
-				loadTimeline(json);
+				$("#holder").resizable({ handles: "s" });
+				// $.getJSON('timeline.json', function(data) {
+					// Serviz.fromLogToTimeline(data);
+				// });
 			}
 			
 			function initializeDateTimePickers() {
@@ -68,7 +78,7 @@
 			}
 			
 			function initializeQTip() {
-				$('#datestart')
+				$('#menu')
 					.removeData('qtip') 
 					.qtip({
 						content: {
@@ -79,8 +89,8 @@
 							}
 						},
 						position: {
-							my: 'bottom left', // Use the corner...
-							at: 'top right' // ...and opposite corner
+							my: 'bottom center', // Use the corner...
+							at: 'top center' // ...and opposite corner
 						},
 						show: {
 							event: false, // Don't specify a show event...
@@ -184,6 +194,7 @@
 					return;
 				}
 				
+
 				// Create a theme for the highlight
 				var theme = Timeline.ClassicTheme.create();
 	            theme.event.bubble.width = 250;
@@ -213,7 +224,7 @@
 					decoratorDown._endDate = dateEnd;
 					decoratorDown.paint();
 				}
-				
+				reloadTimeline(dateStart, dateEnd);
 				reloadGraph(dateStart, dateEnd);
 			}
 

@@ -14,7 +14,7 @@
  var eventSource;
  var bandInfos;
  
- function loadTimeline(jsonData) {
+ function loadTimeline() {
  	   eventSource =  new Timeline.DefaultEventSource();
    bandInfos = [
      Timeline.createBandInfo({
@@ -41,12 +41,24 @@
 		
 	   tl = Timeline.create(document.getElementById("slider"), bandInfos);
 	   
-	      Timeline.loadJSON("temp.json", function(json, url) { eventSource.loadJSON(json, document.location.href); });
 	      
-	      
-
  }
 
+
+function reloadTimeline(dateStart, dateEnd) {
+	//Timeline.loadJSON("temp.json", function(json, url) { eventSource.loadJSON(json, document.location.href); });
+	      
+	      var url = "http://hamlet.st.ewi.tudelft.nl:8080/logdump/logdump?timestart="+dateStart.getTime()+"&timeend="+dateEnd.getTime()+"&static=true";
+	      
+	    $.getJSON(url, function(data) {
+	    	var timelineData = Serviz.fromLogToTimeline(data);
+	    	if (eventSource._events != null) {
+	    		eventSource._events._events.removeAll();
+	    	}
+			eventSource.loadJSON(timelineData, document.location.href);
+		});  
+
+}
  /*var resizeTimerID = null;
  function resizeTimeline() {
      if (resizeTimerID == null) {
