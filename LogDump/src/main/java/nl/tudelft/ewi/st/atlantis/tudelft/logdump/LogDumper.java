@@ -28,27 +28,32 @@ public class LogDumper extends HttpServlet {
 		String staticInfo = req.getParameter("static");
 		String timeStart = req.getParameter("timestart");
 		String timeEnd = req.getParameter("timeend");
-		
-		if (timeStart == null) return;
+		String id = req.getParameter("id");
 		
 		try {
+			if (timeStart == null || (id == null && staticInfo == null)) return;
+
 			Class.forName("org.apache.derby.jdbc.ClientDriver");
 			Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/logdb");
-			
-			Calendar farFuture = Calendar.getInstance();
-			farFuture.add(Calendar.YEAR, 100);
-			
-			Timestamp tStart = new Timestamp(Long.valueOf(timeStart));
-			Timestamp tEnd = timeEnd == null ? new Timestamp(farFuture.getTimeInMillis())
-											 : new Timestamp(Long.valueOf(timeEnd));
-			
 			String output = null;
-			if (staticInfo == null) {
-				output = getDynamicInfo(c, tStart, tEnd);
-			} else if (staticInfo.equals("true")) {
-				output = getStaticInfo(c, tStart, tEnd);
+
+			if (id != null && staticInfo != null) {
+				output = getStaticInfo(c, Integer.parseInt(id));
 			} else {
-				return;
+				Calendar farFuture = Calendar.getInstance();
+				farFuture.add(Calendar.YEAR, 100);
+				
+				Timestamp tStart = new Timestamp(Long.valueOf(timeStart));
+				Timestamp tEnd = timeEnd == null ? new Timestamp(farFuture.getTimeInMillis())
+												 : new Timestamp(Long.valueOf(timeEnd));
+				
+				if (staticInfo == null) {
+					output = getDynamicInfo(c, tStart, tEnd);
+				} else if (staticInfo.equals("true")) {
+					output = getStaticInfo(c, tStart, tEnd);
+				} else {
+					return;
+				} 
 			}
 			
 			resp.getWriter().print(output);
@@ -81,6 +86,26 @@ public class LogDumper extends HttpServlet {
 		while(rs.next()) {
 			obj.append(String.valueOf(rs.getTimestamp("tstamp").getTime()), new JSONArray(rs.getString("json_data")).put(rs.getInt("id")));
 		}
+		
+		return obj.toString();
+	}
+	
+	private String getStaticInfo(Connection c, int id) throws SQLException, JSONException {
+		String sql = "SELECT json_data " +
+		 "FROM staticinfo "+
+		 "WHERE id = ?";
+
+		PreparedStatement st = c.prepareStatement(sql);
+		
+		st.setInt(1, id);
+		
+		ResultSet rs = st.executeQuery();
+		
+		JSONObject obj = new JSONObject();
+		
+		//while(rs.next()) {
+		obj.append(id+"", new JSONArray(rs.getString("json_data")));
+		//}
 		
 		return obj.toString();
 	}

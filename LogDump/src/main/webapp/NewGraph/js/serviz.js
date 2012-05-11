@@ -19,7 +19,7 @@
 				eventObj.start = new Date(parseInt(i));
 				eventObj.durationEvent = false;
 				eventObj.title = "Configuration changed";
-				eventObj.description = "<input type=\"button\" value=\"Load Configuration\" onclick=\"loadStaticConfig("+i+")\"/>";
+				eventObj.description = "<input type=\"button\" value=\"Load Configuration\" onclick=\"loadStaticConfig("+val[0][1]+")\"/>";
 				
 				tlObj.events.push(eventObj);
 			});
