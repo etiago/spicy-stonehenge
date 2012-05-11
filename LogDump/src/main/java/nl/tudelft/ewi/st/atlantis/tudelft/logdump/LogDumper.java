@@ -101,6 +101,8 @@ public class LogDumper extends HttpServlet {
 		
 		ResultSet rs = st.executeQuery();
 		
+		if (!rs.next()) return "";
+		
 		JSONObject obj = new JSONObject();
 		
 		//while(rs.next()) {
