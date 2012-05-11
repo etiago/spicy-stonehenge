@@ -79,8 +79,7 @@ public class LogDumper extends HttpServlet {
 		JSONObject obj = new JSONObject();
 		
 		while(rs.next()) {
-			
-			obj.append(String.valueOf(rs.getTimestamp("tstamp").getTime()), new JSONArray(rs.getString("json_data")).put(rs.getInt("id")).toString());
+			obj.append(String.valueOf(rs.getTimestamp("tstamp").getTime()), new JSONArray(rs.getString("json_data")).put(rs.getInt("id")));
 		}
 		
 		return obj.toString();
