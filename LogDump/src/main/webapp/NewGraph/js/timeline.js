@@ -48,7 +48,7 @@
 function reloadTimeline(dateStart, dateEnd) {
 	//Timeline.loadJSON("temp.json", function(json, url) { eventSource.loadJSON(json, document.location.href); });
 	      
-	      var url = "http://hamlet.st.ewi.tudelft.nl:8080/logdump/logdump?timestart="+dateStart.getTime()+"&timeend="+dateEnd.getTime()+"&static=true";
+	      var url = window.location.origin+"/logdump/logdump?timestart="+dateStart.getTime()+"&timeend="+dateEnd.getTime()+"&static=true";
 	      
 	    $.getJSON(url, function(data) {
 	    	var timelineData = Serviz.fromLogToTimeline(data);

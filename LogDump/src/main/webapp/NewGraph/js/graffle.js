@@ -185,9 +185,9 @@ onend = function (obj) {
 Raphael.fn.boxWithText = function(x, y, width, height, text) {
 	
 	var box = paper.rect(x, y, width, height,10);
-	
+		
 	box.methods = [];
-	box.addMethod = function(methodName) {
+	box.addMethod = function(methodName, staticInfo) {
 		if (this.methods[methodName]) return this.methods[methodName];
 		
 		var length = Object.keys(this.methods).length;
@@ -196,7 +196,16 @@ Raphael.fn.boxWithText = function(x, y, width, height, text) {
 		var y = this.attr("y") + this.attr("height") + (length)*20 + 5;
 		
 		this.methods[methodName] = paper.boxWithText(x,y,this.attr("width")-20,20,methodName);
-		this.methods[methodName].attr({fill:Raphael.getColor()});
+		
+		var color;
+		if (staticInfo) {
+			color = "#8CDBED";
+			staticElements[methodName] = this.methods[methodName];
+		} else {
+			color = "#8CED8C";
+		}
+		
+		this.methods[methodName].attr({fill:Raphael.getRGB(color)});
 		
 		return this.methods[methodName];
 		// only works if directly dragged
@@ -262,6 +271,9 @@ function loadRaphael () {
 //		connections.push(paper.connection(rect, rect2, "#fff", "#fff|2"));
 }
 
+var elements;
+var staticElements;
+
 function reloadGraph(dateStart, dateEnd) {
 		var paperDom = paper.canvas;
     	paperDom.parentNode.removeChild(paperDom);
@@ -271,17 +283,18 @@ function reloadGraph(dateStart, dateEnd) {
 		var posY = 180;
 		var width = 60;
 		var height = 40;
-		var url = 'http://hamlet.st.ewi.tudelft.nl:8080/logdump/logdump?timestart='+dateStart.getTime()+'&timeend='+dateEnd.getTime();
+		var url = window.location.origin+'/logdump/logdump?timestart='+dateStart.getTime()+'&timeend='+dateEnd.getTime();
 		
 		$.getJSON(url, function(doc) {
 		  
-		  var elements = new Object();
-
+		  elements = new Object();
+		  staticElements = new Object();
+		  
 		  $.each(doc.data, function(key, pair) {
 			  //var ratio = pair.CNT / doc.stats.totalCalls
 			  //var red = (ratio * 255).toString(16).substr(0,2)
 			  //var green = ((1-ratio) * 255).toString(16).substr(0,2)
-			  var color = Raphael.getColor();
+			  var color = Raphael.getRGB("#098009");
 			  
 			  //alert(pair.CONSUMER+"=>"+pair.SERVICE);
 			  

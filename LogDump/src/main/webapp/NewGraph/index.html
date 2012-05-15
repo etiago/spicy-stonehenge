@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Serviz</title>
-		<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.19.custom.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/ui-darkness/jquery-ui-1.8.20.custom.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="css/base/jquery.ui.base.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
 
@@ -40,6 +40,7 @@
 				// });
 			}
 			
+
 			function initializeDateTimePickers() {
 				// Configure the datepickers
 				$('#datestart').datetimepicker({
@@ -75,6 +76,7 @@
 				
 							// Fix for the datepicker weirdness at the bottom of the page
 				$('#ui-datepicker-div').css('display','none');
+
 			}
 			
 			function initializeQTip() {
@@ -89,8 +91,8 @@
 							}
 						},
 						position: {
-							my: 'bottom center', // Use the corner...
-							at: 'top center' // ...and opposite corner
+							my: 'top center', // Use the corner...
+							at: 'bottom center' // ...and opposite corner
 						},
 						show: {
 							event: false, // Don't specify a show event...
@@ -155,8 +157,65 @@
 				initializeQTip();
             });
 			
-			function loadStaticConfig(id) {
+			var staticVisible = false;
+			function toggleStatic() {
+				if (staticVisible) {
+					$.each(staticElements, function(key, el) {
+						el.hide();
+						el.text.hide();
+						staticVisible = false;
+					});
+				} else {
+					$.each(staticElements, function(key, el) {
+						el.show();
+						el.text.show();
+						staticVisible = true;
+					});
+				}
+			}
+			
+			function fullReset() {
+				var paperDom = paper.canvas;
+    			paperDom.parentNode.removeChild(paperDom);
+				paper = Raphael("holder", 1024, 768);
 				
+				tl.dispose();
+				loadTimeline();
+				
+				$('#datestart').val("");
+				$('#dateend').val("");
+				
+
+				// if (eventSource._events != null) {
+		    		// eventSource._events._events.removeAll();
+		    	// }
+		    	// eventSource.loadJSON({}, document.location.href);
+			}
+			
+			function loadStaticConfig(id) {
+				staticVisible = true;
+				var url = window.location.origin+"/logdump/logdump?id="+id+"&static=true";
+	      
+			    $.getJSON(url, function(data) {
+			    	jQuery.each(data[id][0], function(i, val) {
+			    		var consumer = null;
+						if (val.name in elements) {
+							consumer = elements[val.name];
+						} else {
+							consumer = paper.boxWithText(0, 0, 60, 40, val.name);
+							consumer.drag(onmove, onstart, onend);
+				  			consumer.attr({fill: Raphael.getRGB("#0987ED"), "fill-opacity": 100, "stroke-width": 2, cursor: "move"});
+				  			
+				  			elements[val.name] = consumer;
+				  			
+				  			staticElements[val.name] = consumer;
+						}
+						
+						jQuery.each(val.operations, function(k, operation) {
+							consumer.addMethod(operation, true);
+						});
+					});
+				});  
 			}
 			
 			var decoratorUp;
@@ -237,13 +296,16 @@
 
 <body >
 <div id="title">Serviz</div>
-<div id="holder"></div>
 <div id="menu">
 	<div id="pickers">
+		<div id="toolboxTitle">Toolbox</div>
 		Start: <input type="text" id="datestart" name="datestart" value="" /><br />
 		End: <input type="text" id="dateend" name="dateend" value="" /><br />
+		<input type="button" id="btnStaticToggle" value="Toggle Static Info" onclick="toggleStatic()" /><br />
+		<input type="button" id="btnReset" value="Full Reset" onclick="fullReset()" />
 	</div>
 </div>
+<div id="holder"></div>
 <div id="slider" class="dark-theme"></div>
 <noscript>
 This page uses Javascript to show you a Timeline. Please enable Javascript in your browser to see the full page. Thank you.
