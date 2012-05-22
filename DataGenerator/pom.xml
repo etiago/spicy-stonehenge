@@ -4,4 +4,13 @@
   <artifactId>DataGenerator</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>DataGenerator</name>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>org.apache.derby</groupId>
+  		<artifactId>derbyclient</artifactId>
+  		<version>10.8.2.2</version>
+  		<type>jar</type>
+  	</dependency>
+  </dependencies>
 </project>

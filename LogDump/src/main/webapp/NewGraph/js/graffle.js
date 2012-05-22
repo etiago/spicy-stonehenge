@@ -316,7 +316,7 @@ function reloadGraph(dateStart, dateEnd) {
 			  if (pair.SERVICE in elements) {
 				service = elements[pair.SERVICE];  
 			  } else {
-				  service = paper.boxWithText(posX+100, posY, width, height, pair.SERVICE);
+				  service = paper.boxWithText(posX+150, posY, width, height, pair.SERVICE);
 				  //service.move(100,100);
 
 				  service.drag(onmove, onstart, onend);
@@ -326,7 +326,8 @@ function reloadGraph(dateStart, dateEnd) {
 			  }
 			  var servMeth = service.addMethod(pair.SERVICE_METHOD);
 			  
-			  connections.push(paper.connection(consMeth, servMeth, "#fff", "#fff|"+pair.CNT));
+			  var thickness = pair.CNT/doc.stats.totalCalls * 10;
+			  connections.push(paper.connection(consMeth, servMeth, "#fff", "#fff|"+thickness));
 		  });
 	});
 	

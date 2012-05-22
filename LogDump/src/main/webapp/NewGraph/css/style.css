@@ -16,11 +16,14 @@ body {
 	width: 1024px;
 	margin-bottom: 10px;
 	padding: 2px;
+	text-shadow: 1px 1px 1px #000;
+	letter-spacing: 5px;
+	text-align: center;
 }
 
 #holder {
 	background: #444;
-    height: 768px;
+    height: 600px;
 	display: block;
     margin: auto;
     -webkit-border-radius: 10px;
@@ -30,10 +33,14 @@ body {
 }
 
 #slider {
-	border: 1px solid #aaa;
-	width: 1024px;
+	border: 3px solid #aaa;
+	width: 1021px;
 	height: 150px;
 	margin: auto;
+	margin-top: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 
 #toolboxTitle {
@@ -53,6 +60,9 @@ body {
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
+	/*-webkit-box-shadow: 0px 0px 19px rgba(255, 255, 255, 0.75);
+-moz-box-shadow:    0px 0px 19px rgba(255, 255, 255, 0.75);
+box-shadow:         0px 0px 19px rgba(255, 255, 255, 0.75);*/
 }
 
 #menu input[type=text] {

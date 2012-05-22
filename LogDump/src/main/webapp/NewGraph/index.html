@@ -175,6 +175,7 @@
 			}
 			
 			function fullReset() {
+				elements = null;
 				var paperDom = paper.canvas;
     			paperDom.parentNode.removeChild(paperDom);
 				paper = Raphael("holder", 1024, 768);
@@ -216,6 +217,34 @@
 						});
 					});
 				});  
+			}
+			
+			function loadLatestStatic() {
+				if (elements == null) {
+					alert("First select a period, then you can load static configurations")
+					return;
+				}
+				var d1 = new Date("January 1, 1970 00:00:00");
+				var d2 = new Date();
+				
+				var url = window.location.origin+"/logdump/logdump?timestart="+d1.getTime()+"&timeend="+d2.getTime()+"&static=true";
+	      
+	      		var latestElement = null;
+	      		var latestTime = 0;
+	      		
+			    $.getJSON(url, function(data) {
+			    	
+			    	jQuery.each(data, function(i, val) {
+						if (i>=latestTime) {
+							latestElement = val;
+							latestTime = i;
+						}
+					});
+					
+					loadStaticConfig(latestElement[0][latestElement[0].length-1]);
+				});  
+				
+				
 			}
 			
 			var decoratorUp;
@@ -301,6 +330,7 @@
 		<div id="toolboxTitle">Toolbox</div>
 		Start: <input type="text" id="datestart" name="datestart" value="" /><br />
 		End: <input type="text" id="dateend" name="dateend" value="" /><br />
+		<input type="button" id="btnLatestConfig" value="Load Latest Static" onclick="loadLatestStatic()" /><br />
 		<input type="button" id="btnStaticToggle" value="Toggle Static Info" onclick="toggleStatic()" /><br />
 		<input type="button" id="btnReset" value="Full Reset" onclick="fullReset()" />
 	</div>
