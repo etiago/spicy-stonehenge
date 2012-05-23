@@ -120,7 +120,7 @@ public class LogDumper extends HttpServlet {
 					 "group by consumer, service, consumer_method, service_method";
 		
 		String sqlStats = "select sum(cnt) from (select DISTINCT CONSUMER,SERVICE, count(*) as CNT "+
-						  "from APP.PAIR group by consumer,service WHERE timestamp >= ? AND timestamp <= ?) as t";
+						  "from APP.PAIR WHERE timestamp >= ? AND timestamp <= ? group by consumer,service) as t";
 		
 		PreparedStatement st = c.prepareStatement(sql);
 		
