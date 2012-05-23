@@ -120,7 +120,7 @@ public class LogDumper extends HttpServlet {
 					 "group by consumer, service, consumer_method, service_method";
 		
 		String sqlStats = "select sum(cnt) from (select DISTINCT CONSUMER,SERVICE, count(*) as CNT "+
-						  "from APP.PAIR group by consumer,service) as t";
+						  "from APP.PAIR group by consumer,service WHERE timestamp >= ? AND timestamp <= ?) as t";
 		
 		PreparedStatement st = c.prepareStatement(sql);
 		
@@ -131,6 +131,9 @@ public class LogDumper extends HttpServlet {
 		JSONArray data = convertResultSetToJSON(rs);
 		
 		st = c.prepareStatement(sqlStats);
+		st.setTimestamp(1, tStart);
+		st.setTimestamp(2, tEnd);
+		
 		ResultSet stats = st.executeQuery();
 		stats.next();
 		

@@ -36,7 +36,7 @@ public class ServerRequestFilter extends BaseHandler {
 		//String who = ctx.getRequestMessage().getTransportHeader("who") == null ? "Unavailable" : ctx.getRequestMessage().getTransportHeader("who");
 		
 		//logger.debug("[SerReq] "+ctx.getAdminName()+" being called... From: "+who+" Request ID ("+ctx.getProcessingStage()+"): "+ctx.getRequestId());
-		
+		System.out.println("------------- Service: "+ctx.getServiceId()+" with request id: "+ ctx.getRequestId()+" operation name: "+ ctx.getOperationName());
 		ctx.setRequestId(ctx.getRequestId()+ctx.getOperationName()+"#", "moo");
 
 		try {
@@ -60,6 +60,7 @@ public class ServerRequestFilter extends BaseHandler {
 			stClean.execute();
 			stClean.clearParameters();
 			
+			System.out.println("preparing "+trace.getRequestID()+" with a trace of "+trace.getTrace().size());
 			for(LogPair pair : trace.getTrace()) {
 				st.setString(1, uuid);
 				st.setString(2, pair.getConsumer().getServiceName());
@@ -75,7 +76,8 @@ public class ServerRequestFilter extends BaseHandler {
 			
 			
 		} catch (Exception e) {
-			throw new ServiceException(e.getMessage());
+			//throw new ServiceException(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		System.out.println("CTX: "+ctx.getRequestId());
