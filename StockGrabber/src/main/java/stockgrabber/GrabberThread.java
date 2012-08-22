@@ -2,8 +2,10 @@ package stockgrabber;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,8 +33,11 @@ public class GrabberThread extends Thread {
 	        try{
 	            // Open the file that is the first 
 	            // command line parameter
-	            FileInputStream fstream = new FileInputStream(filename);
-	
+	            
+	            URL url = this.getClass().getResource("/"+filename);
+	            File f = new File(url.getFile());
+	            FileInputStream fstream = new FileInputStream(f);
+	            
 	            // Get the object of DataInputStream
 	            DataInputStream in = new DataInputStream(fstream);
 	            BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -167,7 +172,7 @@ public class GrabberThread extends Thread {
                 
                 i+=6;
                 
-                StockGrabber.getPublisher().send((s.getTicker()+" "+s.toJSONString()).getBytes(), 0);
+                StockGrabber.getPublisher().publish(s.getTicker(),s.toJSONString());
             }
             
             ps.execute();

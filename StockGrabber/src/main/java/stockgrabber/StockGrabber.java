@@ -4,33 +4,14 @@
  */
 package stockgrabber;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
-import org.zeromq.ZMQ;
-
+import redis.clients.jedis.Jedis;
 import stockgrabber.model.StockData;
-import stockgrabber.provider.GoogleProvider;
-import stockgrabber.provider.StockDataProvider;
-import stockgrabber.provider.YahooProvider;
-import stockgrabber.utils.json.JSONArray;
-import stockgrabber.utils.json.JSONObject;
+
 
 /**
  *
@@ -40,8 +21,10 @@ public class StockGrabber {
 
     public static final int BULK_SIZE = 10;
     
+    private static Jedis jedis;
+    
     private static Connection c = null;
-    private static ZMQ.Socket publisher = null;
+
     static {
         try {
             c = DriverManager.getConnection(
@@ -49,20 +32,15 @@ public class StockGrabber {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        
-        ZMQ.Context context = ZMQ.context(1);
-	    publisher = context.socket(ZMQ.PUB);
-
-	    // We send updates via this socket
-	    publisher.bind("tcp://*:5565");
+        jedis = new Jedis("localhost");
     }
     
     public static Connection getConnection() {
     	return c;
     }
     
-    public static ZMQ.Socket getPublisher() {
-    	return publisher;
+    public static Jedis getPublisher() {
+    	return jedis;
     }
     
     /**

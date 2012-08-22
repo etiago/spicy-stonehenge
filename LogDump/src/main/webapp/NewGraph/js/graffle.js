@@ -302,7 +302,7 @@ function reloadGraph(dateStart, dateEnd) {
 			  if (pair.CONSUMER in elements) {
 			  	consumer = elements[pair.CONSUMER];
 			  } else {
-				  consumer = paper.boxWithText(posX, posY, width, height, pair.CONSUMER);
+				  consumer = paper.boxWithText(posX, posY, width, height, pair.CONSUMER+"\nInvoked #"+pair.CNT+" times");
 				  //consumer.move(100,100);
 				  consumer.drag(onmove, onstart, onend);
 				  consumer.attr({fill: color, "fill-opacity": 100, "stroke-width": 2, cursor: "move"});
@@ -316,7 +316,7 @@ function reloadGraph(dateStart, dateEnd) {
 			  if (pair.SERVICE in elements) {
 				service = elements[pair.SERVICE];  
 			  } else {
-				  service = paper.boxWithText(posX+150, posY, width, height, pair.SERVICE);
+				  service = paper.boxWithText(posX+150, posY, width, height, pair.SERVICE+"\nInvoked #"+pair.CNT+" times");
 				  //service.move(100,100);
 
 				  service.drag(onmove, onstart, onend);

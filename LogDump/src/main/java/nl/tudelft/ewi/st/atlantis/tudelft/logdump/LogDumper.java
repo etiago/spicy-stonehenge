@@ -19,6 +19,25 @@ import nl.tudelft.ewi.st.atlantis.tudelft.logdump.json.JSONException;
 import nl.tudelft.ewi.st.atlantis.tudelft.logdump.json.JSONObject;
 
 public class LogDumper extends HttpServlet {
+	
+//	public static void main(String[] args) throws Exception {
+//		LogDumper l = new LogDumper();
+//		
+//		Class.forName("org.apache.derby.jdbc.ClientDriver");
+//		Connection c = DriverManager.getConnection("jdbc:derby://localhost:1527/logdb");
+//		
+//		Calendar farFuture = Calendar.getInstance();
+//		farFuture.add(Calendar.YEAR, 100);
+//		
+//		String timeEnd = null;
+//		
+//		Timestamp tStart = new Timestamp(Long.valueOf(0));
+//		Timestamp tEnd = timeEnd == null ? new Timestamp(farFuture.getTimeInMillis())
+//										 : new Timestamp(Long.valueOf(timeEnd));
+//		
+//		String s = l.getDynamicInfo(c, tStart, tEnd);
+//		System.out.println(s);
+//	}
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -113,6 +132,7 @@ public class LogDumper extends HttpServlet {
 	}
 	
 	private String getDynamicInfo(Connection c, Timestamp tStart, Timestamp tEnd) throws SQLException, JSONException {
+		//System.out.println("Start:"+tStart.getTime()+" End:"+tEnd.getTime());
 		// Old sql
 		//String sql = "SELECT requestid, consumer, service, consumer_ip, service_ip FROM pair WHERE timestamp >= ?";
 		String sql = "select DISTINCT CONSUMER,consumer_method, SERVICE,service_method, count(*) as CNT " +
